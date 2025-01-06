@@ -54,7 +54,7 @@ class RemootioCover(cover.CoverEntity):
     _remootio_client: RemootioClient
     _attr_has_entity_name = True
     _attr_should_poll = False
-    _attr_supported_features = cover.SUPPORT_OPEN | cover.SUPPORT_CLOSE
+    _attr_supported_features = cover.CoverEntityFeature.OPEN | cover.CoverEntityFeature.CLOSE
     def __init__(
         self,
         unique_id: str,
@@ -70,6 +70,7 @@ class RemootioCover(cover.CoverEntity):
         self._attr_device_info = DeviceInfo(
             name=name,
             manufacturer="Assemblabs Ltd",
+            identifiers={(ATTR_SERIAL_NUMBER, unique_id)},
         )
 
     async def async_added_to_hass(self) -> None:
